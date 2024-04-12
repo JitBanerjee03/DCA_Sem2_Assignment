@@ -1,1 +1,1 @@
-# DCA_Sem2_Assignment
+# This repository is dedicated to my semester assignments for data structure and algorithms
