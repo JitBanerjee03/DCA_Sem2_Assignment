@@ -1,17 +1,18 @@
 #include<stdlib.h>
 #include<stdio.h>
-int *arr,size=0,capacity=0;
+int *arr,size=0;
 
 //functions to create the list
-void Create(int n){
-  int i; 
-  capacity=100;
-  size=n;
-  arr=(int *)malloc(100*sizeof(int));
+int *Create(int n,int capacity){
+  int i,*ptr; 
+  //capacity=100;
+  //size=n;
+  ptr=(int *)malloc(100*sizeof(int));
   for(i=0;i<n;i++){
     printf("\nEnter the value of arr[%d] : ",i);
-    scanf("%d",&arr[i]);
+    scanf("%d",&ptr[i]);
   }
+  return ptr;
 }
 
 //Display function
@@ -152,4 +153,11 @@ void mergeSort(int l,int u){
   mergeSort(mid+1,u);
 
   merge(l,mid,u);
+}
+
+//function to merge two lists
+void Merge_Two_List(int *ptr1,int *ptr2,int size1,int size2){
+  int i=size1,j;
+  for(j=0;j<size2;j++)
+  ptr1[i++]=ptr2[j];
 }

@@ -4,7 +4,8 @@ int main(){
   int n,ch,choice;
   printf("\nEnter the size of the array : ");
   scanf("%d",&n);
-  Create(n);
+  arr=Create(n,100);
+  size=n;
 
   do{
     system("cls");
@@ -18,6 +19,7 @@ int main(){
     printf("\n6) Insert a element in the list");
     printf("\n7) Delete a element from the list");
     printf("\n8) sort the list");
+    printf("\n9) Merge the list with another list");
     printf("\n\nEnter your choice : ");
     scanf("%d",&choice);
     printf("\n");
@@ -61,7 +63,15 @@ int main(){
        case 8: mergeSort(0,size-1);
                break;
 
-    }  
+       case 9: printf("\nEnter the size of the list that is to be merged with main list : ");
+               scanf("%d",&n);
+               printf("\nStart creating the list");
+               int *ptr=Create(n,n);
+               Merge_Two_List(arr,ptr,size,n);
+               size+=n;
+               free(ptr);
+               break;
+        }  
     printf("\nPress 1 to continue and any other key to exit : ");
     fflush(stdin);
     scanf("%d",&choice);
