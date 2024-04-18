@@ -2,8 +2,8 @@
 #include "Functions1.c"
 
 int main(){
-    int choice,n;
-    List *head;
+    int choice,n,n1,n2;
+    List *head,*head1,*head2,*head3;
     printf("\nEnter the number of nodes of the linked list : ");
     scanf("%d",&n);
     head=createList(n);
@@ -72,6 +72,65 @@ int main(){
                   break;
 
          case 13: head=deleteNodeGivenValue(head);
+                  break;
+
+         case 14: head=reverse(head);
+                  break;
+
+         case 15: head=mergeSort(head);
+                  break;
+
+         case 16: searchElement(head);
+                  break;
+
+         case 17: printf("\nEnter the number of nodes of the linked list 1 : ");
+                  scanf("%d",&n1); 
+                  printf("\nEnter the number of nodes of the linked list 2 : ");
+                  scanf("%d",&n2); 
+                  head1=createList(n1);
+                  head1=mergeSort(head1);
+                  displayList(head1);
+                  printf("\n");
+                  head2=createList(n2);
+                  head2=mergeSort(head2);
+                  displayList(head2);
+                  printf("\n");
+                  head3=Merge(head1,head2); 
+                  displayList(head3);
+                  break;
+
+         case 18: printf("\nEnter the number of nodes of the linked list 1 : ");
+                  scanf("%d",&n1); 
+                  printf("\nEnter the number of nodes of the linked list 2 : ");
+                  scanf("%d",&n2); 
+                  head1=createList(n1);
+                  displayList(head1);
+                  printf("\n");
+                  head2=createList(n2);
+                  displayList(head2);
+                  printf("\n");
+                  head3=concatinate(head1,head2);
+                  displayList(head3);
+                  break;
+
+         case 19: printf("\nEnter the number of nodes of the linked list 1 : ");
+                  scanf("%d",&n1); 
+                  printf("\nEnter the number of nodes of the linked list 2 : ");
+                  scanf("%d",&n2); 
+                  head1=createList(n1);
+                  displayList(head1);
+                  printf("\n");
+                  head2=createList(n2);
+                  displayList(head2);
+                  printf("\n");
+                  if(checkEqual(head1,n1,head2,n2))
+                  printf("\nThe given two linked lists are equal");
+                  else
+                  printf("\nThe given two linked lists are not equal");
+                  break;
+
+         default: printf("\nInvalid Input!");
+                  break;
        }
        printf("\nPress 1 to continue and any other key to exit :");
        scanf("%d",&choice);

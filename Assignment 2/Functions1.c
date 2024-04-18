@@ -9,7 +9,13 @@ struct Node{
 //Function to create the linked list
 List *createList(int n){
   int val,i=1;
-  List *head=(List *)malloc(sizeof(List)),*temp=head;
+  List *head=NULL,*temp;
+  if(n<=0){
+    printf("\nInvalid input!");
+  }
+  else{
+  head=(List *)malloc(sizeof(List));
+  temp=head;
   printf("\nEnter the data value of the head node : ");
   scanf("%d",&val);
   head->data=val;
@@ -22,6 +28,7 @@ List *createList(int n){
     temp->next->data=val;
     temp=temp->next;
     temp->next=NULL;
+  }
   }
   return head;
 }
@@ -347,4 +354,130 @@ List *deleteNodeGivenValue(List *head){
   if(flag==0)
   printf("\nLinked list is either empty or non of the nodes in the linked list have the given data value!");
   return head;
+}
+
+//Function to reverse the linked list
+List *reverse(List *head){
+  List *prev=NULL,*cur=head,*next;
+  while(cur!=NULL){
+    next=cur->next;
+    cur->next=prev;
+    prev=cur;
+    cur=next;
+  }
+  return prev;
+}
+
+//Function to merge two linked list in ascending order
+List *Merge(List *head1,List *head2){
+  List *dummy=(List *)malloc(sizeof(List)),*ptr1=head1,*ptr2=head2,*temp=dummy;
+  dummy->data=-1;
+  while(ptr1!=NULL && ptr2!=NULL){
+    
+    if(ptr1->data<=ptr2->data){
+      temp->next=ptr1;
+      ptr1=ptr1->next;
+    }
+
+    else
+    {
+      temp->next=ptr2;
+      ptr2=ptr2->next;
+    }
+    temp=temp->next;
+  }
+  
+  if(ptr1!=NULL)
+  temp->next=ptr1;
+
+  if(ptr2!=NULL)
+  temp->next=ptr2;
+
+  List *head=dummy->next;
+  dummy->next=NULL;
+  free(dummy);
+  return head;
+}
+
+
+//Function to find the mid of the linked list using tortoise and hear algorithm (Concept of fast and slow pointer) 
+List *findMid(List *head){
+  List *fast=head,*slow=head;
+  while (fast->next!=NULL && fast->next->next!=NULL)
+  {
+    fast=fast->next->next;
+    slow=slow->next;
+  }
+  return slow;
+}
+
+//Function to Sort a linked list
+List *mergeSort(List *head){
+  
+  if(head==NULL || head->next==NULL)
+  return head;
+
+  List *mid=findMid(head);
+  List *head1=head,*head2=mid->next;
+  mid->next=NULL;
+  head1=mergeSort(head1);
+  head2=mergeSort(head2);
+  return Merge(head1,head2);
+}
+
+//Function to search a given element
+void searchElement(List *head){
+  int element;
+  printf("\nEnter the element you want to search in the linked list : ");
+  scanf("%d",&element);
+
+  int i=1,flag=0;
+  List *temp=head;
+  while(temp!=NULL){
+    if(temp->data==element){
+      printf("\nGiven element found at node %d",i);
+      flag=1;
+    }
+    i++;
+    temp=temp->next;
+  }
+  if(flag==0)
+  printf("\nEither the linked list is empty or the given element does not exits in the linked list");
+}
+
+//Function to concatinate two linked list
+List *concatinate(List *head1,List *head2){
+  
+  if(head1==NULL || head2==NULL){
+    if(head1==NULL && head2!=NULL)
+    return head2;
+
+    else if(head1!=NULL && head2==NULL)
+    return head1;
+
+    else if(head1==NULL && head2==NULL)
+    return NULL;
+  }
+
+  List *temp=head1;
+  while (temp->next!=NULL)
+  temp=temp->next;
+  temp->next=head2;
+  return head1;
+}
+
+//Function to check weather two linked list are equal or not
+int checkEqual(List *head1,int n1,List *head2,int n2){
+  
+  if(n1!=n2)
+  return 0;
+
+  List *temp1=head1,*temp2=head2;
+  while(temp1!=NULL && temp2!=NULL){
+    if(temp1->data!=temp2->data)
+    return 0;
+    temp1=temp1->next;
+    temp2=temp2->next;
+  }
+  return 1;
 }
